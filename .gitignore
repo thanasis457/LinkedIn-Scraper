@@ -1,0 +1,7 @@
+.conda
+.DS_Store
+backend/**/__pycache__
+frontend/node_modules
+frontend/package-lock.json
+**/*.log
+backend/scraper

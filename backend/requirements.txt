@@ -1,0 +1,72 @@
+appnope==0.1.3
+async-generator==1.10
+attrs==22.2.0
+backcall==0.2.0
+beautifulsoup4==4.11.2
+certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_83242e7e-f82d-4a71-8ef2-9d71d212d249gu_wxmeq/croots/recipe/certifi_1655968827803/work/certifi
+cffi==1.15.1
+charset-normalizer==3.1.0
+click @ file:///opt/concourse/worker/volumes/live/42b55757-67b9-4a67-4429-e65a7264b929/volume/click_1646056605766/work
+cryptography==39.0.2
+cssselect==1.2.0
+debugpy==1.6.6
+decorator==5.1.1
+entrypoints==0.4
+exceptiongroup==1.1.0
+filelock==3.9.0
+Flask @ file:///opt/conda/conda-bld/flask_1648041541647/work
+Flask-Cors==3.0.10
+h11==0.14.0
+idna==3.4
+importlib-metadata @ file:///opt/concourse/worker/volumes/live/4e1a3384-472f-4bcb-7776-cb0076aaea40/volume/importlib-metadata_1648562431336/work
+ipykernel==6.16.2
+ipython==7.34.0
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+jedi==0.18.2
+Jinja2 @ file:///opt/conda/conda-bld/jinja2_1647436528585/work
+jupyter_client==7.4.9
+jupyter_core==4.12.0
+linkedin-api==2.0.0a5
+lxml==4.9.2
+MarkupSafe @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_d4a9444f-bd4c-4043-b47d-cede33979b0fve7bm42r/croots/recipe/markupsafe_1654597878200/work
+matplotlib-inline==0.1.6
+nest-asyncio==1.5.6
+outcome==1.2.0
+packaging==23.0
+parsel==1.7.0
+parso==0.8.3
+pexpect==4.8.0
+pickleshare==0.7.5
+prompt-toolkit==3.0.38
+psutil==5.9.4
+ptyprocess==0.7.0
+pycparser==2.21
+Pygments==2.14.0
+pyOpenSSL==23.0.0
+PySocks==1.7.1
+python-dateutil==2.8.2
+python-dotenv==0.21.1
+pyzmq==25.0.0
+regex==2022.10.31
+requests==2.28.2
+requests-file==1.5.1
+selenium==4.8.2
+six==1.16.0
+sniffio==1.3.0
+sortedcontainers==2.4.0
+soupsieve==2.4
+tldextract==3.4.0
+tornado==6.2
+tqdm==4.65.0
+traitlets==5.9.0
+trio==0.22.0
+trio-websocket==0.9.2
+typing_extensions==4.5.0
+urllib3==1.26.14
+urllib3-secure-extra==0.1.0
+w3lib==2.1.1
+wcwidth==0.2.6
+webdriver-manager==3.8.5
+Werkzeug @ file:///opt/conda/conda-bld/werkzeug_1645628268370/work
+wsproto==1.2.0
+zipp @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_b279673d-f037-44c7-8773-c5a6b6f51037d3wfr9cq/croots/recipe/zipp_1652341773612/work

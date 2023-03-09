@@ -1,0 +1,42 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.title {
+  font-style: oblique;
+  font-weight: 700;
+  font-size: xx-large;
+  padding-bottom: 100;
+}
+
+.ProfileInput {
+  width: 100%;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 20px;
+  background-color: aquamarine;
+}
