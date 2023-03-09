@@ -35,7 +35,8 @@ function App() {
       <header className='App-header'>
         <div className='title'>LinkedIn Profile Scraper</div>
         <Grid container spacing={1} style={{ width: "80%" }}>
-          <Grid item xs={10}>
+          <Grid item xs={2}/>
+          <Grid item xs={8}>
             <Item>
               <InputBase
                 className='ProfileInput'
