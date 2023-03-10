@@ -6,19 +6,39 @@ import {
   InputBase,
   CircularProgress,
   Stack,
+  Divider,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import getProfile from "./api/Profile";
 import DownloadLink from "react-download-link";
+
+function StyledDivider() {
+  return (
+    <Divider
+      orientation='vertical'
+      maxHeight
+      style={{
+        backgroundColor: "white",
+        marginLeft: "10px",
+        marginRight: "10px",
+        height: "20px",
+      }}
+      variant={"fullWidth"}
+    />
+  );
+}
 
 function App() {
   const profileInput = useRef(null);
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [method, setMethod] = useState("scrape");
   const handler = () => {
     setLoading(true);
-    getProfile(profileInput.current.value)
+    getProfile(profileInput.current.value, method)
       .then((res) => {
         setProfile(res.data);
         setError(false);
@@ -36,7 +56,46 @@ function App() {
       <header className='App-header'>
         <div className='title'>LinkedIn Profile Scraper</div>
         <Grid container spacing={1} style={{ width: "80%" }}>
-          <Grid item xs={2} />
+          <Grid item xs={2} alignSelf={"center"} value={method}>
+            <ToggleButtonGroup
+              value={method}
+              sx={{
+                backgroundColor: "#8e87e6",
+                borderRadius: "20px",
+              }}
+              exclusive
+              onChange={(e, v) => {
+                if (v !== null) setMethod(v);
+              }}
+            >
+              <ToggleButton
+                value='scrape'
+                sx={{
+                  color: "#524827",
+                  borderRadius: "20px",
+                  "&.Mui-selected": {
+                    backgroundColor: "#7c74e8",
+                    color: "white",
+                  },
+                }}
+              >
+                Scraper
+              </ToggleButton>
+              <ToggleButton
+                value='api'
+                sx={{
+                  color: "#524827",
+                  borderRadius: "20px",
+                  "&.Mui-selected": {
+                    backgroundColor: "#7c74e8",
+                    color: "white",
+                  },
+                }}
+              >
+                API
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
           <Grid item xs={8}>
             <Item>
               <InputBase
@@ -92,17 +151,32 @@ function Profile({ profile = null, loading = false, error = false }) {
           justifyContent: "flex-start",
         }}
       >
-        <Item className='profileItem'>Name: {profile.name}</Item>
         <Item className='profileItem'>
-          Title Description: {profile.titleDescription}
+          <b>Name</b>
+          <StyledDivider />
+          {profile.name}
         </Item>
-        <Item className='profileItem'>Location: {profile.location}</Item>
-        <Item className='profileItem'>About: {profile.about}</Item>
         <Item className='profileItem'>
-          Experiences:
+          <b>Title Description</b>
+          <StyledDivider />
+          {profile.titleDescription}
+        </Item>
+        <Item className='profileItem'>
+          <b>Location</b>
+          <StyledDivider />
+          {profile.location}
+        </Item>
+        <Item className='profileItem'>
+          <b>About</b>
+          <StyledDivider />
+          <span>{profile.about}</span>
+        </Item>
+        <Item className='profileItem'>
+          <b>Experiences</b>
+          <StyledDivider />
           <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
             {profile.experiences.map((item) => (
-              <ul>
+              <ul style={{}}>
                 <li>Position: {item.position}</li>
                 <li>Company: {item.company}</li>
                 <li>Date Range: {item.dateRange}</li>
@@ -114,7 +188,8 @@ function Profile({ profile = null, loading = false, error = false }) {
           </Stack>
         </Item>
         <Item className='profileItem'>
-          Education:
+          <b>Education</b>
+          <StyledDivider />
           <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
             {profile.education.map((item) => (
               <ul>
@@ -127,29 +202,35 @@ function Profile({ profile = null, loading = false, error = false }) {
           </Stack>
         </Item>
         <Item className='profileItem'>
-          Recommendations:
+          <b>Recommendations</b>
+          <StyledDivider />
           <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
-            {profile.recommendations.map((item) => (
-              <ul>
-                <li>Recommender: {item.name}</li>
-                <li>
-                  Profile: <a href={item.profile}>{item.profile}</a>
-                </li>
-                <li>Date of Testimonial: {item.date}</li>
-                <li>Relationship: {item.relationship}</li>
-                <li>Testimonial: {item.testimonial}</li>
-              </ul>
-            ))}
+            {profile?.recommendations ??
+              [].map((item) => (
+                <ul>
+                  <li>Recommender: {item.name}</li>
+                  {item.profile !== "N/A" ? (
+                    <li>
+                      Profile: <a href={item.profile}>{item.profile}</a>
+                    </li>
+                  ) : (
+                    <li>Profile: {item.profile}</li>
+                  )}
+                  <li>Date of Testimonial: {item.date}</li>
+                  <li>Relationship: {item.relationship}</li>
+                  <li>Testimonial: {item.testimonial}</li>
+                </ul>
+              ))}
           </Stack>
         </Item>
       </Stack>
       <DownloadLink
         label='Save'
         style={{
-          color: 'white',
-          fontSize: '20px',
-          margin: '20px',
-          marginTop: '10px',
+          color: "white",
+          fontSize: "20px",
+          margin: "20px",
+          marginTop: "10px",
         }}
         filename='scraped_profile.json'
         exportFile={() => JSON.stringify(profile)}

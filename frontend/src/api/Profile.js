@@ -10,11 +10,12 @@ const api = axios.create({
   },
 });
 
-export default async function getProfile(url) {
+export default async function getProfile(url, method='scrape') {
     console.log(url)
   return api.get("/profile", {
     params: {
       profile: url,
+      method: method
     },
   });
 }

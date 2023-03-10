@@ -19,9 +19,11 @@ def scrape_profile():
     print(request.args)
     if(profile == None):
         return (Response("No profile was specified"), 400)
-    
+    method = request.args.get("method", default="scrape", type=str)
     busy=False
-    return scraper.scrape_all(profileURL=profile)
+    res= scraper.scrape_all(profileURL=profile, method = method)
+    return res
+    
 
 @app.route("/", methods = ['GET'])
 def status():
