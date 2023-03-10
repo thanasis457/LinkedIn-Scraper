@@ -20,7 +20,7 @@ Start: ```npm start```
 
 
 ### Notes on the backend scraper
-When starting the backend server, a window should open up prompting you to login to your LinkedIn. Sign in as this will be the account used for accessing and scraping other accounts
+When starting the backend server, you will need to enter your LinkedIn credentials twice. You will first be prompted to enter them in the terminal. After that, a browser window should open and prompt you to login to LinkedIn directly from the website. The first is used for the API calls and the second for the scraper.
 
 ### Ports
 The backend occupies port ```5600``` but you can also configure that manually in the code.  
