@@ -4,6 +4,8 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from scrapers import profile, experience, recommendations, education
+from time import sleep, time
+import random
 class Scraper:
     def __init__(self):
         self.options = FirefoxOptions()
@@ -26,8 +28,11 @@ class Scraper:
     
     def scrape_all(self, profileURL):
         self.profileScraped.update(profile.scrape(self.driver, profileURL))
+        sleep(random.randint(1, 4))
         self.profileScraped.update(experience.scrape(self.driver, profileURL))
+        sleep(random.randint(1, 4))
         self.profileScraped.update(education.scrape(self.driver, profileURL))
+        sleep(random.randint(1, 4))
         self.profileScraped.update(recommendations.scrape(self.driver, profileURL))
         return self.profileScraped
 

@@ -85,7 +85,10 @@ def scrape(driver, url):
         return about
     
     driver.get(url)
-    WebDriverWait(driver, timeout=5).until(document_initialised)
+    try:
+        WebDriverWait(driver, timeout=5).until(document_initialised)
+    except:
+        pass
     profileSoup = bs(driver.page_source, "html.parser")
     
     return {

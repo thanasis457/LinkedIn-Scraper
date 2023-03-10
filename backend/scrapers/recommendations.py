@@ -69,7 +69,10 @@ def scrape(driver, url):
         return recommendations
     
     driver.get(url+'details/recommendations/')
-    WebDriverWait(driver, timeout=7).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list") and d.find_element(By.CLASS_NAME,"t-black--light"))
+    try:
+        WebDriverWait(driver, timeout=7).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list") and d.find_element(By.CLASS_NAME,"t-black--light"))
+    except:
+        pass
     recSoup = bs(driver.page_source, 'html.parser')
     recSoup = recSoup.find('ul', {'class':'pvs-list'})
     

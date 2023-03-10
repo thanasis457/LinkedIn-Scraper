@@ -22,44 +22,43 @@ def scrape(driver, url):
                 pass
             # pprint(subjobs[0])
             if(len(subjobs)!=0):
-                try:
-                    job['company'] = exp.div\
-                                .div\
-                                .find_all('div', recursive=False)[1]\
-                                .div\
-                                .a\
-                                .div\
-                                .span\
-                                .span\
-                                .text
-                except:
-                    job['company'] = 'N/A'
-                
-                try:
-                    job['type'] = exp.div\
-                                .div\
-                                .find_all('div', recursive=False)[1]\
-                                .div\
-                                .a\
-                                .find('span', recursive=False)\
-                                .span\
-                                .text
-                except:
-                    job['type'] = 'N/A'
-                
-                try:
-                    job['location'] = exp.div\
-                                .div\
-                                .find_all('div', recursive=False)[1]\
-                                .div\
-                                .a\
-                                .find_all('span', recursive=False)[1]\
-                                .span\
-                                .text
-                except:
-                    job['location'] = 'N/A'
-                
                 for sj in subjobs:
+                    job={}
+                    try:
+                        job['company'] = exp.div\
+                                    .div\
+                                    .find_all('div', recursive=False)[1]\
+                                    .div\
+                                    .a\
+                                    .div\
+                                    .span\
+                                    .span\
+                                    .text
+                    except:
+                        job['company'] = 'N/A'
+                    
+                    try:
+                        job['location'] = exp.div\
+                                    .div\
+                                    .find_all('div', recursive=False)[1]\
+                                    .div\
+                                    .a\
+                                    .find('span', recursive=False, attrs={'class': 't-black--light'})\
+                                    .span\
+                                    .text
+                    except:
+                        try:
+                            job['location'] = sj.div\
+                                .div\
+                                .find_all('div', recursive=False)[1]\
+                                .div\
+                                .a\
+                                .find_all('span', recursive=False, attrs={'class': 't-black--light'})[1]\
+                                .span\
+                                .text
+                        except:
+                            job['location'] = 'N/A'
+                    
                     try:
                         job['position'] = sj.div\
                             .div\
@@ -79,7 +78,7 @@ def scrape(driver, url):
                             .find_all('div', recursive=False)[1]\
                             .div\
                             .a\
-                            .find('span', recursive=False)\
+                            .find('span', recursive=False, attrs={'class': 't-black--light'})\
                             .span\
                             .text
                     except:
@@ -128,7 +127,7 @@ def scrape(driver, url):
                 job['company'] = 'N/A'
             
             try:
-                job['type'] = exp.div\
+                job['job'] = exp.div\
                     .div\
                     .find_all('div', recursive=False)[1]\
                     .div\
@@ -138,7 +137,7 @@ def scrape(driver, url):
                     .text\
                     .split('·')[1]
             except:
-                job['type'] = 'N/A'
+                job['job'] = 'N/A'
             
             try:
                 job['dateRange'] = exp.div\
@@ -187,7 +186,10 @@ def scrape(driver, url):
     
     # def experience_initialised(driver):
     driver.get(url+'details/experience/')
-    WebDriverWait(driver, timeout=5).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list"))
+    try:
+        WebDriverWait(driver, timeout=5).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list"))
+    except:
+        pass
     expSoup = bs(driver.page_source, 'html.parser')
     expSoup = expSoup.find('ul', {'class':'pvs-list'})
     

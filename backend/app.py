@@ -22,7 +22,6 @@ def scrape_profile():
     
     busy=False
     return scraper.scrape_all(profileURL=profile)
-    return "<p>"+profile+"!</p>"
 
 @app.route("/", methods = ['GET'])
 def status():

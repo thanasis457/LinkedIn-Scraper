@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useRef, useState } from "react";
 import getProfile from "./api/Profile";
+import DownloadLink from "react-download-link";
 
 function App() {
   const profileInput = useRef(null);
@@ -35,7 +36,7 @@ function App() {
       <header className='App-header'>
         <div className='title'>LinkedIn Profile Scraper</div>
         <Grid container spacing={1} style={{ width: "80%" }}>
-          <Grid item xs={2}/>
+          <Grid item xs={2} />
           <Grid item xs={8}>
             <Item>
               <InputBase
@@ -54,7 +55,18 @@ function App() {
           </Grid>
           <Grid item xs={2}>
             <Item>
-              <Button variant='contained' onClick={handler} disabled={loading}>
+              <Button
+                variant='contained'
+                style={{
+                  borderRadius: "20px",
+                  paddingLeft: "15px",
+                  paddingRight: "15px",
+                  paddingTop: "11px",
+                  paddingBottom: "11px",
+                }}
+                onClick={handler}
+                disabled={loading}
+              >
                 Scrape
               </Button>
             </Item>
@@ -72,36 +84,39 @@ function Profile({ profile = null, loading = false, error = false }) {
   ) : error ? (
     <div>That threw an error!</div>
   ) : profile ? (
-    <Stack
-      style={{
-        maxWidth: "80%",
-        textAlign: "left",
-        justifyContent: "flex-start",
-      }}
-    >
-      <Item>Name: {profile.name}</Item>
-      <Item>Title Description: {profile.titleDescription}</Item>
-      <Item>Location: {profile.location}</Item>
-      <Item>About: {profile.about}</Item>
-      <Item>
-        Experiences:
-        <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
-          {profile.experiences.map((item) => (
+    <>
+      <Stack
+        style={{
+          maxWidth: "80%",
+          textAlign: "left",
+          justifyContent: "flex-start",
+        }}
+      >
+        <Item className='profileItem'>Name: {profile.name}</Item>
+        <Item className='profileItem'>
+          Title Description: {profile.titleDescription}
+        </Item>
+        <Item className='profileItem'>Location: {profile.location}</Item>
+        <Item className='profileItem'>About: {profile.about}</Item>
+        <Item className='profileItem'>
+          Experiences:
+          <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
+            {profile.experiences.map((item) => (
               <ul>
                 <li>Position: {item.position}</li>
                 <li>Company: {item.company}</li>
                 <li>Date Range: {item.dateRange}</li>
                 <li>Location: {item.location}</li>
-                <li>Job Type: {item.type}</li>
+                {item?.type && <li>Job Type: {item.type}</li>}
                 <li>Description: {item.description}</li>
               </ul>
             ))}
-        </Stack>
-      </Item>
-      <Item>
-        Education:
-        <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
-          {profile.education.map((item) => (
+          </Stack>
+        </Item>
+        <Item className='profileItem'>
+          Education:
+          <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
+            {profile.education.map((item) => (
               <ul>
                 <li>School: {item.name}</li>
                 <li>Degree: {item.degree}</li>
@@ -109,12 +124,12 @@ function Profile({ profile = null, loading = false, error = false }) {
                 <li>Description: {item.description}</li>
               </ul>
             ))}
-        </Stack>
-      </Item>
-      <Item>
-        Recommendations:
-        <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
-          {profile.recommendations.map((item) => (
+          </Stack>
+        </Item>
+        <Item className='profileItem'>
+          Recommendations:
+          <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
+            {profile.recommendations.map((item) => (
               <ul>
                 <li>Recommender: {item.name}</li>
                 <li>
@@ -125,9 +140,21 @@ function Profile({ profile = null, loading = false, error = false }) {
                 <li>Testimonial: {item.testimonial}</li>
               </ul>
             ))}
-        </Stack>
-      </Item>
-    </Stack>
+          </Stack>
+        </Item>
+      </Stack>
+      <DownloadLink
+        label='Save'
+        style={{
+          color: 'white',
+          fontSize: '20px',
+          margin: '20px',
+          marginTop: '10px',
+        }}
+        filename='scraped_profile.json'
+        exportFile={() => JSON.stringify(profile)}
+      />
+    </>
   ) : (
     <></>
   );

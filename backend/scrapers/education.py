@@ -70,7 +70,10 @@ def scrape(driver, url):
         return education
     
     driver.get(url+'details/education/')
-    WebDriverWait(driver, timeout=7).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list") and d.find_element(By.CLASS_NAME,"ivm-image-view-model"))
+    try:
+        WebDriverWait(driver, timeout=7).until(lambda d: d.find_element(By.TAG_NAME,"ul") and d.find_element(By.CLASS_NAME,"pvs-list") and d.find_element(By.CLASS_NAME,"ivm-image-view-model"))
+    except:
+        pass
     edSoup = bs(driver.page_source, 'html.parser')
     edSoup = edSoup.find('ul', {'class':'pvs-list'})
     
