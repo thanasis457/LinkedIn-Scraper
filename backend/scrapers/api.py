@@ -5,7 +5,12 @@ import re
 print("Enter your email:")
 email = input()
 password = getpass('Enter your password:')
-api = Linkedin(username=email, password=password)
+api = None
+try:
+    api = Linkedin(username=email, password=password)
+except:
+    print('Could not login')
+    
 
 def get_profile(url):
     profile = re.search('in/([A-Za-z0-9\-]*)/.*', url)
