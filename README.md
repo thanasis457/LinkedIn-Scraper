@@ -1,7 +1,7 @@
 # LinkedIn Scraper
 A project aiming to easily scrape profiles off of LinkedIn
 
-![](https://imgur.com/QGAYxna.png)
+![](https://imgur.com/jOoEu2h.png)
 
 ## Setup
 ### Download Project
@@ -31,6 +31,7 @@ The backend is very barebones and only supports one request, namely scraping a p
 If you want to test it or make external calls (ie. using Postman) the GET endpoint is ```/profile``` and the params should look like this:
 ```
 {  
-  profile: "Enter the profile url here"  
+  profile: "Enter the profile url here",
+  method: "Choose either 'scrape' or 'api'"
 }
   ```
