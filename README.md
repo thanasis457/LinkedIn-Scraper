@@ -10,7 +10,7 @@ A project aiming to easily scrape profiles off of LinkedIn
 
 ### Backend
 Navigate to directory: ```cd backend```  
-Install dependencies: ```pip install -r requirements.txt```
+Install dependencies: ```pip install -r requirements.txt```  
 Start: ```python3 app.py```
 
 ### Frontend
@@ -20,7 +20,7 @@ Start: ```npm start```
 
 
 ### Notes on the backend scraper
-When starting the backend server, a window should open up prompting you to login to your LinkedIn. Sign in as this will be the account used for accessing and scraping other accounts
+When starting the backend server, you will need to enter your LinkedIn credentials twice. You will first be prompted to enter them in the terminal. After that, a browser window should open and prompt you to login to LinkedIn directly from the website. The first is used for the API calls and the second for the scraper.
 
 ### Ports
 The backend occupies port ```5600``` but you can also configure that manually in the code.  
@@ -38,7 +38,7 @@ If you want to test it or make external calls (ie. using Postman) the GET endpoi
 
 ## How it works
 
-#### The scraper
+### The scraper
 The first option to fetch profiles is to scrape them. An automated browser visits the profile through an authenticated account and scrapes the data we want. The difficulty here is to wait enough time for LinkedIn to not suspect the account for scraping but not long enough that makes the response time unbearably long.
 
 Inside the project there is also an unused implementation of automated authentication, taking advantage of an authentication post request we can observer from simply inspecting the LinkedIn page and selecting the values of some cookies to mask ourselves as a user in a normal browsing session. The downside is that if LinkedIn suspects us of abusing the platform it starts sending cookies with a name like "trk..." which are used for abuse prevention [as mentioned here](https://www.linkedin.com/legal/l/cookie-table). I have not found a way around them so this method is not reliable long term, which is why this project uses the traditional slow but safe manual UI login.
