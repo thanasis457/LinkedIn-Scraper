@@ -205,8 +205,8 @@ function Profile({ profile = null, loading = false, error = false }) {
           <b>Recommendations</b>
           <StyledDivider />
           <Stack style={{ maxHeight: "400px", overflow: "scroll" }}>
-            {profile?.recommendations ??
-              [].map((item) => (
+            {(profile?.recommendations ??
+              []).map((item) => (
                 <ul>
                   <li>Recommender: {item.name}</li>
                   {item.profile !== "N/A" ? (
